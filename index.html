@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BFV Bienestar a tu Alcance</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Owl Carousel JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <!-- Custom JS -->
+    <script defer src="js/scripts.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="images/logo2.JPG" alt="">
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar...">
+                <button>Buscar</button>
+            </div>
+            <div class="cart">
+                <a href="Carrito.html">Carrito (<span id="cart-count">0</span>)</a>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <section class="carousel-container">
+            <div class="owl-carousel">
+                <!-- Agregamos imagenes para el banner -->
+                <div><img src="images/banner-1.png" alt="Imagen 1"></div>
+                <div><img src="images/banner-2.jpg" alt="Imagen 2"></div>
+                <div><img src="images/banner-3.png" alt="Imagen 3"></div>
+                <div><img src="images/banner-4.png" alt="Imagen 4"></div>
+                <div><img src="images/banner-5.png" alt="Imagen 5"></div>
+            </div>
+        </section>
+        
+        <section class="products">
+            <div class="container">
+                <div class="row">
+                    <!-- Ejemplo de producto -->
+                    <div class="col-md-4">
+                        <div class="product">
+                            <img src="images/Ego.png" alt="Producto 1">
+                            <p>Crema para peinar en gel</p>
+                            <button class="btn btn-primary add-to-cart" data-product-id="1" data-product-name="Crema para peinar en gel" data-product-price="10.00">Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="product">
+                            <img src="images/Bismutol.png" alt="Producto 2">
+                            <p>Producto para disminuir la acidez estomacal</p>
+                            <button class="btn btn-primary add-to-cart" data-product-id="2" data-product-name="Producto para disminuir la acidez estomacal" data-product-price="15.00">Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="product">
+                            <img src="images/ensure.png" alt="Producto 3">
+                            <p>Leche en polvo para adultos</p>
+                            <button class="btn btn-primary add-to-cart" data-product-id="3" data-product-name="Leche en polvo para adultos" data-product-price="25.00">Agregar al carrito</button>
+                        </div>
+                    </div>
+                    <!-- Repite para más productos -->
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>© 2024 Botica Fuente de Vida</p>
+    </footer>
+
+    <script>
+        $(document).ready(function(){
+            $('.owl-carousel').owlCarousel({
+                loop:true,
+                margin:10,
+                nav:true,
+                autoplay:true,
+                autoplayTimeout:3000,
+                responsive:{
+                    0:{
+                        items:1
+                    },
+                    600:{
+                        items:1
+                    },
+                    1000:{
+                        items:1
+                    }
+                }
+            });
+
+            // Carrito de compras
+            let cart = [];
+            let total = 0;
+            $('.add-to-cart').click(function(){
+                let productId = $(this).data('product-id');
+                let productName = $(this).data('product-name');
+                let productPrice = parseFloat($(this).data('product-price'));
+                
+                cart.push({
+                    id: productId,
+                    name: productName,
+                    price: productPrice
+                });
+
+                total += productPrice;
+                
+                $('#cart-count').text(cart.length);
+
+                // Guardar el carrito y el total en el almacenamiento local
+                localStorage.setItem('cart', JSON.stringify(cart));
+                localStorage.setItem('total', total.toFixed(2));
+            });
+        });
+    </script>
+</body>
+</html>
